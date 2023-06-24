@@ -18,13 +18,23 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetHighScoreText();
+
         playButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitGame);
     }
 
+    private void SetHighScoreText()
+    {
+        string playerName = DataManager.instance.getPlayerName();
+        int highScore = DataManager.instance.getHighScore();
+
+        highScoreText.text = $"High Score : {playerName} : {highScore}";
+    }
+
     private void StartGame()
     {
-        DataManager.instance.setPlayerName(playerNameText.text);
+        DataManager.instance.setCurrentPlayerName(playerNameText.text);
         SceneManager.LoadScene(1);
     }
 
